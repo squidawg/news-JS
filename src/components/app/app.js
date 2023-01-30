@@ -1,7 +1,7 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
 
-class App {
+export default class App {
     constructor() {
         this.controller = new AppController();
         this.view = new AppView();
@@ -14,5 +14,3 @@ class App {
         this.controller.getSources((data) => this.view.drawSources(data));
     }
 }
-
-export default App;
