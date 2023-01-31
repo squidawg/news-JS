@@ -4,18 +4,24 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const baseConfig = {
-    entry: path.resolve(__dirname, './src/index.ts'),
+    entry: path.resolve(__dirname, './src/_index.ts'),
     mode: 'development',
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
-                use: ['ts-loader', 'style-loader', 'css-loader'],
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
             },
+            {
+                test: /\.tsx?$/,
+                use: ['ts-loader'],
+
+            },
+
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
+        extensions: ['.tsx', '.ts', '.js', '.css'],
     },
     output: {
         filename: 'index.js',
