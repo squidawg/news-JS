@@ -1,9 +1,9 @@
 type Data ={
   articles: [Article] | [],
-  sources: Source,
+  sources: [Source] | [],
 }
 
-export type Article= {
+export type Article = {
   author: string,
   content: string
   description: string
@@ -18,12 +18,13 @@ export type Article= {
 
 }
 
-export interface Source {
+export type Source ={
   category: string,
   country: string,
   description: string,
   id: string,
   language: string,
+  name: string,
   url: string
 }
 

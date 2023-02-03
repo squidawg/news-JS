@@ -14,8 +14,7 @@ export default class App{
     const sources = document.querySelector('.sources') as HTMLElement;
     sources
       .addEventListener('click', (e:MouseEvent) =>
-        this.controller.getNews(e, (data: Data) :void => {
-          this.view.drawNews(data)}));
+        this.controller.getNews(e, (data: Data) :void => this.view.drawNews(data)));
     this.controller.getSources((data: Data) :void => this.view.drawSources(data));
   }
 

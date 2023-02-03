@@ -1,6 +1,6 @@
 import News from './news/news';
-import Sources from './sources/sources.js';
-import Data , {Article}from "../../variables";
+import Sources from './sources/sources';
+import Data , {Article, Source} from "../../variables";
 
 class AppView{
     private newsData: News;
@@ -17,7 +17,7 @@ class AppView{
     }
 
     drawSources(data: Data) : void {
-        const values = data?.sources ? data?.sources : [];
+        const values: [Source] | [] = data?.sources;
         this.sourcesData.draw(values);
     }
 }
