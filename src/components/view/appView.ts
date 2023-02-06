@@ -11,13 +11,13 @@ class AppView{
     }
 
     drawNews(data: Data) : void {
-        const values: [Article] | [] = data?.articles;
+        const values: Array<Article> | [] = data?.articles;
             this.newsData.draw(values);
 
     }
 
     drawSources(data: Data) : void {
-        const values: [Source] | [] = data?.sources;
+        const values: Array<Source> | [] = data?.sources;
         this.sourcesData.draw(values);
     }
 }

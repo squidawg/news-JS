@@ -2,8 +2,8 @@ import './news.css';
 import { Article } from "../../../variables";
 class News{
 
-    draw(data: [Article] | []):void {
-        const news: Article[] = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
+    draw(data: Array<Article> | []):void {
+        const news: Article[] = data.length >= 10 ? data.filter((_item:Article, idx:number) => idx < 10) : data;
 
         const fragment = document.createDocumentFragment() as DocumentFragment;
         const newsItemTemp = document.querySelector('#newsItemTemp') as HTMLTemplateElement;

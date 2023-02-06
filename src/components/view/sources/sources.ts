@@ -2,12 +2,12 @@ import './sources.css';
 import { Source } from "../../../variables";
 
 class Sources {
-    draw(data: [Source] | []):void {
+    draw(data: Array<Source> | []):void {
         const fragment = document.createDocumentFragment() as DocumentFragment;
         const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
 
         data.forEach((item:Source):void => {
-            const sourceClone = sourceItemTemp.content.cloneNode(true) as HTMLTemplateElement;
+            const sourceClone = sourceItemTemp.content.cloneNode(true) as HTMLElement;
             const sourceItemName = sourceClone.querySelector('.source__item-name') as HTMLElement;
             const sourceItem = sourceClone.querySelector('.source__item') as HTMLElement;
             sourceItemName.textContent = item.name;

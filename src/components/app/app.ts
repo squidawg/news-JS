@@ -2,8 +2,8 @@ import AppController from '../controller/controller';
 import AppView from '../view/appView'
 import Data from "../../variables";
 export default class App{
-  private controller: AppController;
-  private view: AppView;
+  private readonly controller: AppController;
+  private readonly view: AppView;
 
   constructor() {
     this.controller = new AppController();

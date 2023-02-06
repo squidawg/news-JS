@@ -1,44 +1,25 @@
-
-// enum for eeror handling
 import Data from "../../variables";
+import { ErrorStatus, Attributes, Callback} from "../../variables"
 
-enum ErrorStatus {
-    "unauthorized" = 401,
-    "notFound" = 404
-}
-// attr for methods inside class Loader
-interface Endpoint {
-    endpoint: string,
-}
-interface Options {
-    option: object
-}
-
-
-class Loader implements Endpoint, Options{
+class Loader{
     private readonly baseLink: string;
     private readonly options: object;
-    constructor(baseLink:string, options:object) {
+    constructor(baseLink:string, options:object ) {
         this.baseLink = baseLink;
         this.options = options;
     }
-
-    option: object= {};
-
-    endpoint =  '';
-
-
-    getResp({endpoint = '', options = {}},
-        callback: (data:Data) => void = () => {
+    protected getResp(attributes:Attributes,
+        callback: Callback = () => {
             console.error('No callback for GET response');
         }
-    ):void {
-        this.load('GET', callback, options, endpoint);
+
+    ) :void {
+        this.load('GET', callback, attributes);
     }
 
     errorHandler(res:Response):Response {
         if (!res.ok) {
-            if (res.status === ErrorStatus.unauthorized || res.status === ErrorStatus.notFound)
+            if (Object.values(ErrorStatus).includes(res.status))
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }
@@ -46,17 +27,17 @@ class Loader implements Endpoint, Options{
         return res;
     }
 
-    makeUrl(options:object, endpoint: string){
-        const urlOptions = { ...this.options, ...options  };
-        let url = `${this.baseLink}${endpoint}?`;
+    makeUrl(attributes:Attributes){
+        const urlOptions = { ...this.options, ...attributes.options  };
+        let url = `${this.baseLink}${attributes.endpoint}?`;
         (Object.keys(urlOptions) as (keyof typeof urlOptions)[]).forEach((key) => {
             url += `${key}=${urlOptions[key]}&`;
         });
         return url.slice(0, -1);
     }
 
-    load(method:string, callback: (data:Data) => void, options: object = {}, endpoint: string) {
-        fetch(this.makeUrl(options, endpoint), { method })
+    load(method:string, callback: Callback, attributes:Attributes) {
+        fetch(this.makeUrl(attributes), { method })
           .then(this.errorHandler).then((res) => res.json())
           .then((data:Data) => callback(data))
           .catch((err) => console.error(err));

@@ -1,9 +1,14 @@
 type Data ={
-  articles: [Article] | [],
-  sources: [Source] | [],
+  articles: Array<Article> | [],
+  sources: Array<Source> | [],
 }
 
-export type Article = {
+export interface Attributes {
+  endpoint: string;
+  options?: object
+}
+
+export interface Article{
   author: string,
   content: string
   description: string
@@ -18,7 +23,7 @@ export type Article = {
 
 }
 
-export type Source ={
+export interface Source {
   category: string,
   country: string,
   description: string,
@@ -27,5 +32,11 @@ export type Source ={
   name: string,
   url: string
 }
+
+export enum ErrorStatus {
+  "unauthorized" = 401,
+  "notFound" = 404
+}
+export type Callback = (data:Data) => void
 
 export default Data;
