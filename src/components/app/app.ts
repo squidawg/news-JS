@@ -1,4 +1,4 @@
-import AppController from '../controller/controller.js';
+import AppController from '../controller/controller';
 import AppView from '../view/appView'
 import Data from "../../variables";
 export default class App{

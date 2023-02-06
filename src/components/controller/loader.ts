@@ -1,5 +1,7 @@
 
 // enum for eeror handling
+import Data from "../../variables";
+
 enum ErrorStatus {
     "unauthorized" = 401,
     "notFound" = 404
@@ -27,7 +29,7 @@ class Loader implements Endpoint, Options{
 
 
     getResp({endpoint = '', options = {}},
-        callback: () => void = () => {
+        callback: (data:Data) => void = () => {
             console.error('No callback for GET response');
         }
     ):void {
@@ -53,10 +55,10 @@ class Loader implements Endpoint, Options{
         return url.slice(0, -1);
     }
 
-    load(method:string, callback: (n?: string) => void, options: object = {}, endpoint: string) {
+    load(method:string, callback: (data:Data) => void, options: object = {}, endpoint: string) {
         fetch(this.makeUrl(options, endpoint), { method })
           .then(this.errorHandler).then((res) => res.json())
-          .then((data:string) => callback(data))
+          .then((data:Data) => callback(data))
           .catch((err) => console.error(err));
     }
 
