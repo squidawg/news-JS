@@ -1,42 +1,46 @@
-type Data ={
-  articles: Array<Article> | [],
-  sources: Array<Source> | [],
-}
-
 export interface Attributes {
   endpoint: string;
-  options?: object
+  options: object
 }
 
-export interface Article{
-  author: string,
-  content: string
-  description: string
-  publishedAt: string,
+export interface Article<Type>{
+  author: Type,
+  content: Type
+  description: Type
+  publishedAt: Type,
   source: {
-    id: string,
-    name: string,
+    id: Type,
+    name: Type,
   }
-  title: string,
-  url: string,
-  urlToImage: string
+  title: Type,
+  url: Type,
+  urlToImage: Type
 
 }
 
-export interface Source {
-  category: string,
-  country: string,
-  description: string,
-  id: string,
-  language: string,
-  name: string,
-  url: string
+export interface Source<Type> {
+  category: Type,
+  country: Type,
+  description: Type,
+  id: Type,
+  language: Type,
+  name: Type,
+  url: Type
 }
+
+type Data ={
+  articles: Array<Article<string>> | [],
+  sources: Array<PickedSources> | [],
+}
+
+export type PickedSources = Pick<Source<string>, 'id' | 'name'>
+export type PartialAttributes = Partial<Attributes>
 
 export enum ErrorStatus {
   "unauthorized" = 401,
   "notFound" = 404
 }
+
 export type Callback = (data:Data) => void
 
 export default Data;

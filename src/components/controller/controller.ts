@@ -1,8 +1,8 @@
 import AppLoader from './appLoader';
-import  {Callback} from "../../variables";
+import { Callback } from "../../variables";
 
 class AppController extends AppLoader {
-    getSources(callback: Callback):void {
+    getSources<Type extends Callback>(callback: Type):void {
         super.getResp(
             {
                 endpoint: 'sources',

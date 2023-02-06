@@ -2,13 +2,13 @@ import './news.css';
 import { Article } from "../../../variables";
 class News{
 
-    draw(data: Array<Article> | []):void {
-        const news: Article[] = data.length >= 10 ? data.filter((_item:Article, idx:number) => idx < 10) : data;
+    draw(data: Array<Article<string>> | []):void {
+        const news: Article<string>[] = data.length >= 10 ? data.filter((_item:Article<string>, idx:number) => idx < 10) : data;
 
         const fragment = document.createDocumentFragment() as DocumentFragment;
         const newsItemTemp = document.querySelector('#newsItemTemp') as HTMLTemplateElement;
 
-        news.forEach((item:Article, idx:number):void => {
+        news.forEach((item:Article<string>, idx:number):void => {
             const newsClone = newsItemTemp.content.cloneNode(true) as HTMLTemplateElement;
             const newsCloneItem = newsClone.querySelector('.news__item') as HTMLTemplateElement;
             const newsMetaPhoto = newsClone.querySelector('.news__meta-photo') as HTMLTemplateElement;

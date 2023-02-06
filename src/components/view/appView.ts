@@ -1,6 +1,6 @@
 import News from './news/news';
 import Sources from './sources/sources';
-import Data , {Article, Source} from "../../variables";
+import Data, { Article, PickedSources } from "../../variables";
 
 class AppView{
     private newsData: News;
@@ -10,14 +10,14 @@ class AppView{
         this.sourcesData = new Sources();
     }
 
-    drawNews(data: Data) : void {
-        const values: Array<Article> | [] = data?.articles;
+    drawNews<Type extends Data>(data: Type) : void {
+        const values: Array<Article<string>> | [] = data?.articles;
             this.newsData.draw(values);
 
     }
 
-    drawSources(data: Data) : void {
-        const values: Array<Source> | [] = data?.sources;
+    drawSources<Type extends Data>(data: Type) : void {
+        const values: Array<PickedSources> | [] = data?.sources;
         this.sourcesData.draw(values);
     }
 }

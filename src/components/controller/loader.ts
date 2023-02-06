@@ -1,5 +1,5 @@
 import Data from "../../variables";
-import { ErrorStatus, Attributes, Callback} from "../../variables"
+import { ErrorStatus, Callback, PartialAttributes} from "../../variables"
 
 class Loader{
     private readonly baseLink: string;
@@ -8,7 +8,8 @@ class Loader{
         this.baseLink = baseLink;
         this.options = options;
     }
-    protected getResp(attributes:Attributes,
+    // ??
+    protected getResp(attributes:PartialAttributes,
         callback: Callback = () => {
             console.error('No callback for GET response');
         }
@@ -27,7 +28,7 @@ class Loader{
         return res;
     }
 
-    makeUrl(attributes:Attributes){
+    makeUrl<Type extends PartialAttributes>(attributes:Type):string{
         const urlOptions = { ...this.options, ...attributes.options  };
         let url = `${this.baseLink}${attributes.endpoint}?`;
         (Object.keys(urlOptions) as (keyof typeof urlOptions)[]).forEach((key) => {
@@ -36,8 +37,8 @@ class Loader{
         return url.slice(0, -1);
     }
 
-    load(method:string, callback: Callback, attributes:Attributes) {
-        fetch(this.makeUrl(attributes), { method })
+    load(method:string, callback: Callback, attributes:PartialAttributes) {
+        fetch(this.makeUrl<PartialAttributes>(attributes), { method })
           .then(this.errorHandler).then((res) => res.json())
           .then((data:Data) => callback(data))
           .catch((err) => console.error(err));
