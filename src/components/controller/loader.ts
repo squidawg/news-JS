@@ -1,15 +1,15 @@
 import Data from "../../variables";
-import { ErrorStatus, Callback, PartialAttributes} from "../../variables"
+import { ErrorStatus, Callback, PartialAttributes, LoaderTemplate} from "../../variables"
 
-class Loader{
-    private readonly baseLink: string;
-    private readonly options: object;
+
+class Loader implements LoaderTemplate{
+    readonly baseLink: string;
+    readonly options: object;
     constructor(baseLink:string, options:object ) {
         this.baseLink = baseLink;
         this.options = options;
     }
-    // ??
-    protected getResp(attributes:PartialAttributes,
+    getResp(attributes:PartialAttributes,
         callback: Callback = () => {
             console.error('No callback for GET response');
         }
@@ -37,7 +37,7 @@ class Loader{
         return url.slice(0, -1);
     }
 
-    load(method:string, callback: Callback, attributes:PartialAttributes) {
+    load(method:string, callback: Callback, attributes:PartialAttributes):void {
         fetch(this.makeUrl<PartialAttributes>(attributes), { method })
           .then(this.errorHandler).then((res) => res.json())
           .then((data:Data) => callback(data))

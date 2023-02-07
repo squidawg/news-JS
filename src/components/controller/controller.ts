@@ -1,7 +1,7 @@
 import AppLoader from './appLoader';
-import { Callback } from "../../variables";
+import { Callback, AppControllerTemplate } from "../../variables";
 
-class AppController extends AppLoader {
+class AppController extends AppLoader implements AppControllerTemplate{
     getSources<Type extends Callback>(callback: Type):void {
         super.getResp(
             {

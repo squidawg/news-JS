@@ -1,6 +1,8 @@
 import './news.css';
-import { Article } from "../../../variables";
-class News{
+import { NewsTemplate, Article} from "../../../variables";
+
+
+class News implements NewsTemplate{
 
     draw(data: Array<Article<string>> | []):void {
         const news: Article<string>[] = data.length >= 10 ? data.filter((_item:Article<string>, idx:number) => idx < 10) : data;

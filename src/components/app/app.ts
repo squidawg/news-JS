@@ -1,7 +1,8 @@
 import AppController from '../controller/controller';
 import AppView from '../view/appView'
-import Data, { Callback } from "../../variables";
-export default class App{
+import Data, { Callback, AppTemplate } from "../../variables";
+
+export default class App implements AppTemplate{
   private readonly controller: AppController;
   private readonly view: AppView;
 

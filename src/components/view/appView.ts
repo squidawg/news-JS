@@ -1,10 +1,10 @@
 import News from './news/news';
 import Sources from './sources/sources';
-import Data, { Article, PickedSources } from "../../variables";
+import Data, { Article, PickedSources, AppViewTemplate } from "../../variables";
 
-class AppView{
-    private newsData: News;
-    private sourcesData: Sources;
+class AppView implements AppViewTemplate{
+    private readonly newsData: News;
+    private readonly sourcesData: Sources;
     constructor() {
         this.newsData = new News();
         this.sourcesData = new Sources();
