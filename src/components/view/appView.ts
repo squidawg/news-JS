@@ -12,7 +12,7 @@ class AppView implements AppViewTemplate{
 
     drawNews<Type extends Data>(data: Type) : void {
         const values: Array<Article<string>> = data.articles;
-            this.newsData.draw(values);
+        this.newsData.draw(values);
 
     }
 
