@@ -1,25 +1,25 @@
 import './news.css';
-import { NewsTemplate, Article} from "../../../variables";
+import { NewsTemplate, Article} from "../../../types";
 
 
 class News implements NewsTemplate{
 
-    draw(data: Array<Article<string>> | []):void {
+    draw(data: Array<Article<string>>):void {
         const news: Article<string>[] = data.length >= 10 ? data.filter((_item:Article<string>, idx:number) => idx < 10) : data;
 
         const fragment = document.createDocumentFragment() as DocumentFragment;
         const newsItemTemp = document.querySelector('#newsItemTemp') as HTMLTemplateElement;
 
-        news.forEach((item:Article<string>, idx:number):void => {
+        news.forEach((item:Article<string>, idx:number)=> {
             const newsClone = newsItemTemp.content.cloneNode(true) as HTMLTemplateElement;
-            const newsCloneItem = newsClone.querySelector('.news__item') as HTMLTemplateElement;
-            const newsMetaPhoto = newsClone.querySelector('.news__meta-photo') as HTMLTemplateElement;
-            const newsMetaAuthor = newsClone.querySelector('.news__meta-author') as HTMLTemplateElement;
-            const newsMetaDate = newsClone.querySelector('.news__meta-date') as HTMLTemplateElement;
-            const newsDescTitle = newsClone.querySelector('.news__description-title') as HTMLTemplateElement;
-            const newsDescSource = newsClone.querySelector('.news__description-source') as HTMLTemplateElement;
-            const newsDescContent = newsClone.querySelector('.news__description-content') as HTMLTemplateElement;
-            const newsReadMore = newsClone.querySelector('.news__read-more a') as HTMLTemplateElement;
+            const newsCloneItem = newsClone.querySelector('.news__item') as HTMLElement;
+            const newsMetaPhoto = newsClone.querySelector('.news__meta-photo') as HTMLElement;
+            const newsMetaAuthor = newsClone.querySelector('.news__meta-author') as HTMLElement;
+            const newsMetaDate = newsClone.querySelector('.news__meta-date') as HTMLElement;
+            const newsDescTitle = newsClone.querySelector('.news__description-title') as HTMLElement;
+            const newsDescSource = newsClone.querySelector('.news__description-source') as HTMLElement;
+            const newsDescContent = newsClone.querySelector('.news__description-content') as HTMLElement;
+            const newsReadMore = newsClone.querySelector('.news__read-more a') as HTMLElement;
             if (idx % 2) newsCloneItem.classList.add('alt');
 
             newsMetaPhoto.style.backgroundImage = `url(${
@@ -39,7 +39,7 @@ class News implements NewsTemplate{
 
             fragment.append(newsClone);
         });
-        const newsHtml = document.querySelector('.news') as HTMLTemplateElement;
+        const newsHtml = document.querySelector('.news') as HTMLElement;
         newsHtml.innerHTML = '';
         newsHtml.appendChild(fragment);
     }

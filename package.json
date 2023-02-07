@@ -6,7 +6,6 @@
   "scripts": {
     "start": "webpack serve --open --config ./webpack.config.js --env mode=dev",
     "develop": "tsc &&  webpack-dev-server --mode development",
-    "build": "webpack --mode production",
     "lint": "eslint . --ext .ts"
   },
   "repository": {

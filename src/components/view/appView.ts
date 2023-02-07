@@ -1,6 +1,6 @@
 import News from './news/news';
 import Sources from './sources/sources';
-import Data, { Article, PickedSources, AppViewTemplate } from "../../variables";
+import Data, { Article, PickedSources, AppViewTemplate } from "../../types";
 
 class AppView implements AppViewTemplate{
     private readonly newsData: News;
@@ -11,13 +11,13 @@ class AppView implements AppViewTemplate{
     }
 
     drawNews<Type extends Data>(data: Type) : void {
-        const values: Array<Article<string>> | [] = data?.articles;
+        const values: Array<Article<string>> = data.articles;
             this.newsData.draw(values);
 
     }
 
     drawSources<Type extends Data>(data: Type) : void {
-        const values: Array<PickedSources> | [] = data?.sources;
+        const values: Array<PickedSources> = data.sources;
         this.sourcesData.draw(values);
     }
 }
